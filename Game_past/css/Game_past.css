@@ -1,0 +1,132 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+#container {
+    height: 400px;
+    width: 1200px;
+    position: relative;
+    overflow: hidden;
+}
+
+#container #road {
+    height: 290px;
+    width: 2000px;
+    position: absolute;
+    bottom: 0;
+}
+
+#container #road img {
+    height: 290px;
+    width: 2000px;
+    position: absolute;
+    left: 0;
+    animation: none;
+}
+
+@keyframes roadAnimate {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: -800px;
+    }
+}
+
+#container #character {
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    bottom: 28px;
+    left: 20px;
+}
+
+#container #character img {
+    height: 70px;
+    width: 70px;
+}
+
+/* #container #character_2 {
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    bottom: 28px;
+    left: 20px;
+}
+
+#container #character_2 img {
+    height: 70px;
+    width: 70px;
+} */
+
+.characterActive {
+    animation: animateCharacter 0.5s linear infinite;
+}
+
+@keyframes animateCharacter {
+
+    0%,
+    100% {
+        bottom: 28px;
+    }
+
+    45%,
+    55% {
+        bottom: 160px;
+    }
+}
+
+#container #block {
+    height: 70px;
+    width: 80px;
+    position: absolute;
+    bottom: 50px;
+    right: -20px;
+}
+
+#container #block img {
+    height: 70px;
+    width: 80px;
+}
+
+.blockActive {
+    animation: blockAnimate 3s linear infinite;
+}
+
+@keyframes blockAnimate {
+    0% {
+        right: -125px;
+    }
+
+    100% {
+        right: 100%;
+    }
+}
+
+#score {
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 120px;
+    right: 20px;
+}
+
+#gameOver {
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(50% - 40px);
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
