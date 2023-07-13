@@ -10,6 +10,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: url("bgd.png") no-repeat center center fixed;
+    background-size: cover;
   }
 
   .content {
@@ -18,18 +20,14 @@
 
   .content img {
     display: block;
-    margin-left: 20px;
+    margin-left: 100px; /* gofo 이미지를 좌측으로 100px 이동 */
     position: relative;
-  }
-
-  .content img[src="gofo.png"] {
-    margin-left: -20px; /* gofo 이미지를 왼쪽으로 20px 이동 */
   }
 
   .content .polygon {
     display: none;
     position: absolute;
-    left: 50%; /* polygon 이미지의 가로 중앙 위치 */
+    left: calc(50% - 100px); /* polygon 이미지의 가로 중앙 위치에서 100px 좌측으로 이동 */
     transform: translateX(-50%);
   }
 
@@ -38,18 +36,18 @@
   }
 
   .content a:hover + .polygon.start {
-    left: 410px;
-    top: 325px; /* start 이미지의 위로 100px 위치 */
+    left: calc(400px - 100px); /* start 이미지의 가로 위치에서 100px 좌측으로 이동 */
+    top: 365px; /* start 이미지의 위로 100px 위치 */
   }
 
   .content a:hover + .polygon.exit {
-    left: 410px;
-    top: 385px; /* exit 이미지의 위로 200px 위치 */
+    left: calc(400px - 100px); /* exit 이미지의 가로 위치에서 100px 좌측으로 이동 */
+    top: 445px; /* exit 이미지의 위로 200px 위치 */
   }
 
   .content a:hover + .polygon.menu {
-    left: 410px;
-    top: 435px; /* menu 이미지의 위로 300px 위치 */
+    left: calc(400px - 100px); /* menu 이미지의 가로 위치에서 100px 좌측으로 이동 */
+    top: 515px; /* menu 이미지의 위로 300px 위치 */
   }
 
   .content p {
@@ -58,13 +56,13 @@
   }
 </style>
 </head>
-<body background="bgd.png">
+<body>
   <div class="content">
     <img src="gofo.png" alt="gofo">
     <p></p>
     <a href="p2.html">
       <img src="start.png" alt="start">
-    </a>akwdk
+    </a>
     <img src="polygon.png" alt="polygon" class="polygon start">
     <p></p>
     <a href="p2.html">
