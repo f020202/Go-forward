@@ -1,69 +1,82 @@
 let container = document.querySelector("#container");
 let character = document.querySelector("#character");
-let character_2 = document.querySelector("#character_2");
 let block = document.querySelector("#block");
 let road = document.querySelector("#road");
-let cloud = document.querySelector("#cloud");
 let score = document.querySelector("#score");
 let gameOver = document.querySelector("#gameOver");
 
-//declaring variable for score
+// Life elements
+let life1 = document.querySelector("#life1");
+let life2 = document.querySelector("#life2");
+let life3 = document.querySelector("#life3");
+
+let lives = [life1, life2, life3];  // array to keep track of lives
+
+// declaring variable for score
 let interval = null;
 let playerScore = 0;
 
-
-//function for score
+// function for score
 let scoreCounter = () => {
     playerScore++;
     score.innerHTML = `Score <b>${playerScore}</b>`;
 }
 
+// Collision state
+let collisionState = false;
 
-//start Game
+// Game state
+let gameRunning = false;
+
+// start Game
 window.addEventListener("keydown", (start) => {
-    //    console.log(start);
-    if (start.code == "Space") {
-        road.firstElementChild.style.animation = "roadAnimate 1.5s linear infinite";
+    if (start.code == "Space" && !gameRunning) {  // Check if the game is not running
+        if (lives.length <= 0) {
+            // reset lives
+            lives = [life1, life2, life3];  // Reset the lives
+            lives.forEach(life => life.style.display = "block");
+        }
+        road.firstElementChild.style.animation = "roadAnimate 2.5s linear infinite";
         gameOver.style.display = "none";
         block.classList.add("blockActive");
-        //score
-        let playerScore = 0;
+        // score
+        playerScore = 0;
+        collisionState = false;
+        gameRunning = true;
         interval = setInterval(scoreCounter, 200);
     }
 });
 
-
-//jump Your Character
+// jump Your Character
 window.addEventListener("keydown", (e) => {
-    //    console.log(e);
-
     if (e.key == "ArrowUp")
         if (character.classList != "characterActive") {
             character.classList.add("characterActive");
-
-            //                remove class after 0.5 seconds
+            //  remove class after 0.5 seconds
             setTimeout(() => {
                 character.classList.remove("characterActive");
             }, 500);
         }
 });
 
-
 //'Game Over' if 'Character' hit The 'Block' 
 let result = setInterval(() => {
     let characterBottom = parseInt(getComputedStyle(character).getPropertyValue("bottom"));
-    //    console.log("characterBottom" + characterBottom);
-
     let blockLeft = parseInt(getComputedStyle(block).getPropertyValue("left"));
-    //    console.log("BlockLeft" + blockLeft);
 
-    if (characterBottom <= 90 && blockLeft >= 20 && blockLeft <= 80) {
-        //        console.log("Game Over");
-
-        gameOver.style.display = "block";
-        block.classList.remove("blockActive");
-        road.firstElementChild.style.animation = "none";
-        clearInterval(interval);
-        playerScore = 0;
+    if (!collisionState && characterBottom <= 90 && blockLeft >= 20 && blockLeft <= 50) {
+        // remove a life
+        let lastLife = lives.pop();
+        lastLife.style.display = "none"; // hides the life
+        collisionState = true;
+        setTimeout(() => {collisionState = false;}, 1000);  // waits for 1s before allowing another collision
+        if (lives.length <= 0) {  // When no more lives left
+            gameOver.style.display = "block";
+            block.classList.remove("blockActive");
+            road.firstElementChild.style.animation = "none";
+            clearInterval(interval);
+            playerScore = 0;
+            gameRunning = false;
+        }
     }
 }, 10);
