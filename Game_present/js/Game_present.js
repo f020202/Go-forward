@@ -38,7 +38,7 @@ window.addEventListener("keydown", (start) => {
             lives = [life1, life2, life3];  // Reset the lives
             lives.forEach(life => life.style.display = "block");
         }
-        road.firstElementChild.style.animation = "roadAnimate 2.5s linear infinite";
+        road.firstElementChild.style.animation = "roadAnimate 3.5s linear infinite";
         gameOver.style.display = "none";
         block.classList.add("blockActive");
         crystalball.classList.add("crystalballActive");  
