@@ -18,35 +18,72 @@ body {
     overflow: hidden;
 }
 
+#container #death1{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+#container #death2{
+    height: 20px;
+    width: 20px;
+    left: 50px;
+    position: absolute;
+}
+
+#container #death3{
+    height: 20px;
+    width: 20px;
+    left: 100px;
+    position: absolute;
+}
+
+#container #life1{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+#container #life2{
+    height: 20px;
+    width: 20px;
+    left: 50px;
+    position: absolute;
+}
+
+#container #life3{
+    height: 20px;
+    width: 20px;
+    left: 100px;
+    position: absolute;
+}
+
 #container #road {
-    height: 290px;
-    width: 2000px;
+    height: 400px;
+    width: 3000px;
     position: absolute;
     bottom: 0;
 }
 
 #container #road img {
-    height: 290px;
-    width: 2000px;
+    height: 400px;
+    width: 3300px;
     position: absolute;
-    left: 0;
+    left: 0px;
     animation: none;
-}
+    opacity: 0.9;
+}  
 
 @keyframes roadAnimate {
-    0% {
-        left: 0;
-    }
-    100% {
-        left: -800px;
-    }
+    0% {left: 0px;}
+    100% {left: -70%;}
 }
 
 #container #character {
     height: 70px;
     width: 70px;
     position: absolute;
-    bottom: 28px;
+    bottom: 35px;
     left: 20px;
 }
 
@@ -55,47 +92,28 @@ body {
     width: 70px;
 }
 
-/* #container #character_2 {
-    height: 70px;
-    width: 70px;
-    position: absolute;
-    bottom: 28px;
-    left: 20px;
-}
-
-#container #character_2 img {
-    height: 70px;
-    width: 70px;
-} */
-
 .characterActive {
     animation: animateCharacter 0.5s linear infinite;
 }
 
 @keyframes animateCharacter {
-
     0%,
-    100% {
-        bottom: 28px;
-    }
-
+    100% { bottom: 28px; }
     45%,
-    55% {
-        bottom: 160px;
-    }
+    55% { bottom: 160px; }
 }
 
 #container #block {
-    height: 70px;
-    width: 80px;
+    height: 28px;
+    width: 50px;
     position: absolute;
-    bottom: 50px;
+    bottom: 70px;
     right: -20px;
 }
 
 #container #block img {
-    height: 70px;
-    width: 80px;
+    height: 28px;
+    width: 50px;
 }
 
 .blockActive {
@@ -103,20 +121,15 @@ body {
 }
 
 @keyframes blockAnimate {
-    0% {
-        right: -125px;
-    }
-
-    100% {
-        right: 100%;
-    }
+    0% { right: -125px; }
+    100% { right: 100%; }
 }
 
 #score {
     height: auto;
     width: auto;
     position: absolute;
-    top: 120px;
+    top: 20px;
     right: 20px;
 }
 
@@ -125,7 +138,7 @@ body {
     font-size: 70px;
     position: absolute;
     left: calc(50% - 150px);
-    top: calc(50% - 40px);
+    top: calc(50% - 70px);
     width: 362px;
     height: 80px;
     color: #525252;
