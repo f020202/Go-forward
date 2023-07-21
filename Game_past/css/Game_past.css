@@ -79,6 +79,22 @@ body {
     100% {left: -70%;}
 }
 
+/* bounce animation */
+@keyframes bounce {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-100px); }
+    100% { transform: translateX(0); }
+}
+
+.bounce {
+    animation: bounce 0.5s linear;
+}
+
+/* red flash class */
+.redFlash {
+    filter: hue-rotate(-360deg) saturate(200%);
+}
+
 #container #character {
     height: 70px;
     width: 70px;
@@ -100,8 +116,9 @@ body {
     0%,
     100% { bottom: 28px; }
     45%,
-    55% { bottom: 160px; }
+    55% { bottom: 200px; }
 }
+
 
 #container #block {
     height: 28px;
@@ -124,6 +141,29 @@ body {
     0% { right: -125px; }
     100% { right: 100%; }
 }
+
+#container #crystalball {
+    height: 28px;
+    width: 50px;
+    position: absolute;
+    bottom: 250px;
+    right: -20px;
+}
+
+#container #crystalball img {
+    height: 70px;
+    width: 70px;
+}
+
+.crystalballActive {
+    animation: crystalballAnimate 4s linear infinite;
+}
+
+@keyframes crystalballAnimate {
+    0% { right: -250px; }
+    100% { right: 100%; }
+}
+
 
 #score {
     height: auto;
