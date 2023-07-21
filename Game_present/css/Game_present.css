@@ -1,0 +1,185 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+#container {
+    height: 400px;
+    width: 1200px;
+    position: relative;
+    overflow: hidden;
+}
+
+#container #death1{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+#container #death2{
+    height: 20px;
+    width: 20px;
+    left: 50px;
+    position: absolute;
+}
+
+#container #death3{
+    height: 20px;
+    width: 20px;
+    left: 100px;
+    position: absolute;
+}
+
+#container #life1{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+#container #life2{
+    height: 20px;
+    width: 20px;
+    left: 50px;
+    position: absolute;
+}
+
+#container #life3{
+    height: 20px;
+    width: 20px;
+    left: 100px;
+    position: absolute;
+}
+
+#container #road {
+    height: 400px;
+    width: 3000px;
+    position: absolute;
+    bottom: 0;
+}
+
+#container #road img {
+    height: 400px;
+    width: 3300px;
+    position: absolute;
+    left: 0px;
+    animation: none;
+    opacity: 0.9;
+}  
+
+@keyframes roadAnimate {
+    0% {left: 0px;}
+    100% {left: -70%;}
+}
+
+/* bounce animation */
+@keyframes bounce {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-100px); }
+    100% { transform: translateX(0); }
+}
+
+.bounce {
+    animation: bounce 0.5s linear;
+}
+
+/* red flash class */
+.redFlash {
+    filter: hue-rotate(-360deg) saturate(200%);
+}
+
+#container #character {
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    bottom: 35px;
+    left: 20px;
+}
+
+#container #character img {
+    height: 70px;
+    width: 70px;
+}
+
+.characterActive {
+    animation: animateCharacter 0.5s linear infinite;
+}
+
+@keyframes animateCharacter {
+    0%,
+    100% { bottom: 28px; }
+    45%,
+    55% { bottom: 200px; }
+}
+
+
+#container #block {
+    height: 28px;
+    width: 50px;
+    position: absolute;
+    bottom: 70px;
+    right: -20px;
+}
+
+#container #block img {
+    height: 28px;
+    width: 50px;
+}
+
+.blockActive {
+    animation: blockAnimate 3s linear infinite;
+}
+
+@keyframes blockAnimate {
+    0% { right: -125px; }
+    100% { right: 100%; }
+}
+
+#container #crystalball {
+    height: 28px;
+    width: 50px;
+    position: absolute;
+    bottom: 250px;
+    right: -20px;
+}
+
+#container #crystalball img {
+    height: 70px;
+    width: 70px;
+}
+
+.crystalballActive {
+    animation: crystalballAnimate 4s linear infinite;
+}
+
+@keyframes crystalballAnimate {
+    0% { right: -250px; }
+    100% { right: 100%; }
+}
+
+
+#score {
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#gameOver {
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(50% - 70px);
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
