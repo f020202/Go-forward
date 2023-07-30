@@ -71,7 +71,7 @@ document.addEventListener('keydown',function(e){
         }
         else if(arrow_num==1){
             console.log('1입니다')
-            location.href = 'Game_future.html';
+            location.href = '../Game_present/Game_present.html';
         }
         else if(arrow_num==2){
             console.log('2입니다')
