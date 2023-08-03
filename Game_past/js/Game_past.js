@@ -75,12 +75,10 @@ function checkGameStatus() {
         clearInterval(result);
         gameRunning = false;
         if (playerScore >= 5) {  // If score is 10 or more
-            gameOver.innerHTML = "Game clear!";
-            gameOver.style.display = "block";
+            document.getElementById("gameclear").style.display = "block";
 
         } else {  // If score is less than 10
-            gameOver.innerHTML = "Stage success! Collect more crystalball";
-            gameOver.style.display = "block";
+            document.getElementById("stage_success").style.display = "block";
         }
         // Reset block, crystalball and character animations
         block.style.animation = "";
@@ -126,9 +124,9 @@ let result = setInterval(() => {
     }
     // 게임 중 느낌표를 보여줄 조건이 충족되면 위 함수를 호출
     // 예: 블록과 캐릭터가 충돌하는 경우
-    if (monsterLeft < 50 && monsterLeft > 20 && characterBottom < 90) {
-        showExclamationAndRedirect();
-    }
+    // if (monsterLeft < 50 && monsterLeft > 20 && characterBottom < 90) {
+    //     showExclamationAndRedirect();
+    // }
 
     // Reset the flag when the next crystalball appears
     if (crystalballLeft > 0) {
