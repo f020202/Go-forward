@@ -123,10 +123,10 @@ let result = setInterval(() => {
         isCounted = true;
     }
     // 게임 중 느낌표를 보여줄 조건이 충족되면 위 함수를 호출
-    // 예: 블록과 캐릭터가 충돌하는 경우
-    // if (monsterLeft < 50 && monsterLeft > 20 && characterBottom < 90) {
-    //     showExclamationAndRedirect();
-    // }
+    // 예: 몬스터와 캐릭터가 충돌하는 경우
+    if (monsterLeft < 50 && monsterLeft > 20 && characterBottom < 90) {
+        showExclamationAndRedirect();
+    }
 
     // Reset the flag when the next crystalball appears
     if (crystalballLeft > 0) {
