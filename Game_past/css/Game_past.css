@@ -204,6 +204,27 @@ body {
     height: 80px;
     color: #525252;
 }
+#gameclear {
+    z-index: 10;
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left:350px;
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
+
+#stage_success {
+    z-index: 10;
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left:350px;
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
 
 #container #exclamation {
     z-index: 10;
