@@ -206,25 +206,25 @@ let result = setInterval(() => {
         characterRect.top < blockRect.bottom &&
         characterRect.bottom > blockRect.top
     ) {
-        if (!collisionState && characterBottom <= 90 && blockLeft >= 20 && blockLeft <= 50) {
-            character.classList.add('bounce', 'redFlash');
-            let lastLife = lives.pop();
-            lastLife.style.display = "none";
-            collisionState = true;
-            setTimeout(() => {
-                character.classList.remove('bounce', 'redFlash');
-                collisionState = false;
-            }, 1000);
-            if (lives.length <= 0) {
-                gameOver.style.display = "block";
-                block.classList.remove("blockActive");
-                crystalball.classList.remove("crystalballActive");
-                road.firstElementChild.style.animation = "none";
-                clearInterval(interval);
-                playerScore = 0;
-                gameRunning = false;
-            }
-        }
+        // if (!collisionState && characterBottom <= 90 && blockLeft >= 20 && blockLeft <= 50) {
+        //     character.classList.add('bounce', 'redFlash');
+        //     let lastLife = lives.pop();
+        //     lastLife.style.display = "none";
+        //     collisionState = true;
+        //     setTimeout(() => {
+        //         character.classList.remove('bounce', 'redFlash');
+        //         collisionState = false;
+        //     }, 1000);
+        //     if (lives.length <= 0) {
+        //         gameOver.style.display = "block";
+        //         block.classList.remove("blockActive");
+        //         crystalball.classList.remove("crystalballActive");
+        //         road.firstElementChild.style.animation = "none";
+        //         clearInterval(interval);
+        //         playerScore = 0;
+        //         gameRunning = false;
+        //     }
+        // }
     }
 
     if (
