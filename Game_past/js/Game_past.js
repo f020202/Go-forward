@@ -155,7 +155,7 @@ function showExclamationAndRedirect() {
     exclamation.style.display = "block"; // 느낌표 보이기
     setTimeout(() => {
         exclamation.style.display = "none"; // 느낌표 숨기기
-        window.location.href = "../Event/index.html"; // 새 페이지로 이동
+        window.location.href = "../Event/teachable_machine_pose/index.html"; // 새 페이지로 이동
     }, 3000); // 3초 후 실행
 }
 
