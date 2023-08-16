@@ -157,6 +157,13 @@ function showExclamationAndRedirect() {
     }, 3000); // 3초 후 실행
 }
 
+function showplus() {
+    let plus = document.querySelector("#plus");
+    plus.style.display = "block"; // 플러스 보이기
+    setTimeout(() => {
+        plus.style.display = "none"; // 플러스 숨기기
+    }, 500); // 1초 후 실행
+}
 
 //'Game Over' if 'Character' hit The 'Block' 
 let result = setInterval(() => {
@@ -224,6 +231,7 @@ let result = setInterval(() => {
             scoreAdded = true;
             
             // 캐릭터와 수정구가 충돌했을 때
+            showplus();
             crystalballHitCount++;  // 충돌 횟수 증가
             if (crystalballHitCount >= 5) { // 충돌 횟수가 5회 이상이면 게임 상태 확인
                 checkGameStatus();
