@@ -78,41 +78,7 @@
                             <!-- 예측 확률을 담을 div -->
                         </div>
                         <!-- Slide-end -->
-                        <!-- Slide-start -->
-                        <div class="swiper-slide tranding-slide">
-                            <div class="tranding-slide-img">
-                                <img src="running.png" alt="운동사진">
-                            </div>
-                            <div class="prediction"></div>
-                            <!-- 예측 확률을 담을 div -->
-                        </div>
-                        <!-- Slide-end -->
-                        <!-- Slide-start -->
-                        <div class="swiper-slide tranding-slide">
-                            <div class="tranding-slide-img">
-                                <img src="running.png" alt="운동사진">
-                            </div>
-                            <div class="prediction"></div>
-                            <!-- 예측 확률을 담을 div -->
-                        </div>
-                        <!-- Slide-end -->
-                        <!-- Slide-start -->
-                        <div class="swiper-slide tranding-slide">
-                            <div class="tranding-slide-img">
-                                <img src="running.png" alt="운동사진">
-                            </div>
-                            <div class="prediction"></div>
-                            <!-- 예측 확률을 담을 div -->
-                        </div>
-                        <!-- Slide-end -->
-                        <!-- Slide-start -->
-                        <div class="swiper-slide tranding-slide">
-                            <div class="tranding-slide-img">
-                                <img src="running.png" alt="운동사진">
-                            </div>
-                            <div class="prediction"></div>
-                            <!-- 예측 확률을 담을 div -->
-                        </div>
+                        ]
                         <!-- Slide-end -->
                         <div class="swiper-slide tranding-slide">
                             <div class="tranding-slide-img">
@@ -291,9 +257,11 @@
 
         // 슬라이드 변경될 때마다 호출될 함수
         function onSlideChange() {
-
-
-
+            const activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+            const activeImage = activeSlide.querySelector('img');
+            if (activeImage && activeImage.src.endsWith('black2.jpg')) {
+                window.location.href = "../../Game_past/Game_past.html";
+            }
         }
 
         async function initializeSwiper() {
