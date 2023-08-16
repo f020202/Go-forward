@@ -46,7 +46,7 @@ function unblockGame() {
 }
 
 // start Game
-window.addEventListener("keydown", async (start)  => {
+window.addEventListener("keydown", async (start) => {
     if (gameBlocked) return;
     if (start.code == "Space" && !gameRunning && lives.length > 0) {  // Check if the game is not running
         crystalballCount = 0;
@@ -55,7 +55,7 @@ window.addEventListener("keydown", async (start)  => {
             lives = [life1, life2, life3];  // Reset the lives
             lives.forEach(life => life.style.display = "block");
         }
-        road.firstElementChild.style.animation = "roadAnimate 2.5s linear infinite";
+        road.firstElementChild.style.animation = "roadAnimate 3.5s linear infinite";
         gameOver.style.display = "none";
         block.classList.add("blockActive");
         monster.classList.add("monsterActive");
@@ -114,47 +114,31 @@ function hideLoadingIndicator() {
     document.getElementById("loadingIndicator").style.display = "none";
 }
 
-
-// jump Your Character
-window.addEventListener("keydown", (e) => {
-    if (e.key == "ArrowUp")
-        if (character.classList != "characterActive") {
-            character.classList.add("characterActive");
-            //  remove class after 0.5 seconds
-            setTimeout(() => {
-                character.classList.remove("characterActive");
-            }, 500);
-        }
-});
-
 let isCounted = false; // new flag
 
 // Flag to check if the score was already added
 let scoreAdded = false;
 
+let crystalballHitCount = 0; // 캐릭터가 수정구와 충돌한 횟수를 카운트
+
 // Check game status
 function checkGameStatus() {
-    if (crystalballCount >= 5) {  // When all 10 crystalballs have appeared
+    if (crystalballHitCount >= 5) {  // 캐릭터와 수정구가 5번 충돌했을 때
         block.classList.remove("blockActive");
-        crystalball.classList.remove("crystalballActive");  // Stop the crystalball
+        crystalball.classList.remove("crystalballActive");
         road.firstElementChild.style.animation = "none";
         clearInterval(result);
         gameRunning = false;
-        if (playerScore >= 5) {  // If score is 10 or more
+        if (playerScore >= 5) {
             document.getElementById("gameclear").style.display = "block";
-
-        } else {  // If score is less than 10
-            document.getElementById("stage_success").style.display = "block";
         }
-        // Reset block, crystalball and character animations
         block.style.animation = "";
         crystalball.style.animation = "";
         character.style.animation = "";
-
-        // Set the game over flag
         gameRunning = true;
     }
 }
+
 function pauseGame() {
     road.firstElementChild.style.animation = "none"; // 도로 애니메이션 중지
     block.classList.remove("blockActive"); // 블록 애니메이션 중지
@@ -169,10 +153,17 @@ function showExclamationAndRedirect() {
     exclamation.style.display = "block"; // 느낌표 보이기
     setTimeout(() => {
         exclamation.style.display = "none"; // 느낌표 숨기기
-        window.location.href = "new_page.html"; // 새 페이지로 이동
+        window.location.href = "../Event/teachable_machine_pose/index.html"; // 새 페이지로 이동
     }, 3000); // 3초 후 실행
 }
 
+function showplus() {
+    let plus = document.querySelector("#plus");
+    plus.style.display = "block"; // 플러스 보이기
+    setTimeout(() => {
+        plus.style.display = "none"; // 플러스 숨기기
+    }, 500); // 1초 후 실행
+}
 
 //'Game Over' if 'Character' hit The 'Block' 
 let result = setInterval(() => {
@@ -181,25 +172,25 @@ let result = setInterval(() => {
     let blockLeft = parseInt(getComputedStyle(block).getPropertyValue("left"));
     let crystalballLeft = parseInt(getComputedStyle(crystalball).getPropertyValue("left"));
     let monsterLeft = parseInt(getComputedStyle(monster).getPropertyValue("left")); // monster의 left 위치
-    
+
     let characterRect = character.getBoundingClientRect();
     let blockRect = block.getBoundingClientRect();
     let crystalballRect = crystalball.getBoundingClientRect();
     let monsterRect = monster.getBoundingClientRect();
 
-     // 캐릭터와 다른 객체들의 위치 정보를 사용한 충돌 검사
+    // 캐릭터와 다른 객체들의 위치 정보를 사용한 충돌 검사
     if (
         characterRect.left < monsterRect.right &&
         characterRect.right > monsterRect.left &&
         characterRect.top < monsterRect.bottom &&
         characterRect.bottom > monsterRect.top
-    ) {  
-        // 캐릭터와 블록이 충돌한 경우의 로직
+    ) {
+        // 캐릭터와 몬스터가 충돌한 경우의 로직
         if (monsterLeft < 50 && monsterLeft > 20 && characterBottom < 90) {
             showExclamationAndRedirect();
         }
     }
-    
+
     if (
         characterRect.left < blockRect.right &&
         characterRect.right > blockRect.left &&
@@ -225,6 +216,7 @@ let result = setInterval(() => {
                 gameRunning = false;
             }
         }
+
     }
 
     if (
@@ -232,40 +224,20 @@ let result = setInterval(() => {
         characterRect.right > crystalballRect.left &&
         characterRect.top < crystalballRect.bottom &&
         characterRect.bottom > crystalballRect.top
-    ) { 
-        character.classList.add('flashEffect');  // 반짝이는 효과 적용
-        
-        setTimeout(() => {
-            character.classList.remove('flashEffect');  // 일정 시간 후 효과 제거
-        }, 1000);  // 1초 후에 효과 제거
-       
-        // Increase the crystalball count when it starts to appear from the right side
-        if (crystalballLeft <= 0 && !isCounted) {
-            crystalballCount++;
-            console.log(crystalballCount);
-            isCounted = true;
-        }
-        
-        // When character and crystalball collide, increase the score by 1
+    ) {
         if (!scoreAdded) {
-            playerScore += 1; // increment score by 1
-            score.innerHTML = `Score <b>${playerScore}</b>`; // Update the score on the screen
+            playerScore += 1;
+            score.innerHTML = `Score <b>${playerScore}</b>`;
             scoreAdded = true;
+            
+            // 캐릭터와 수정구가 충돌했을 때
+            showplus();
+            crystalballHitCount++;  // 충돌 횟수 증가
+            if (crystalballHitCount >= 5) { // 충돌 횟수가 5회 이상이면 게임 상태 확인
+                checkGameStatus();
+            }
         }
     } else {
-        scoreAdded = false; // Reset the score added flag when not colliding
+        scoreAdded = false;
     }
-    
-    
-    // Reset the flag when the next crystalball appears
-if (crystalballLeft > 0) {
-    isCounted = false;
-}
-
-// Stop the crystalball when the count reaches 5
-if (crystalballCount >= 5) {
-    checkGameStatus();  // Check the game status
-}
-
-    
 }, 10);

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Goforward Game</title>
     <link rel="stylesheet" href="css/Game_past.css">
 </head>
+
 <body>
     <div id="container">
-        <div id = "gameclear">
+        <div id="gameclear">
             <img src="assets/gameclear.png" alt="gameclear">
-        </div>
-        <div id = "stage_success">
-            <img src="assets/stage_success.png" alt="stage_success">
         </div>
         <div id="monster">
             <img src="assets/monster.png" alt="monster">
@@ -28,50 +27,51 @@
         <div id="block">
             <img src="assets/fish.png" alt="blocks">
         </div>
-        <div id = "death1">
+        <div id="death1">
             <img src="assets/death1.png" alt="death1">
         </div>
-        <div id = "death2">
+        <div id="death2">
             <img src="assets/death2.png" alt="death2">
         </div>
-        <div id = "death3">
+        <div id="death3">
             <img src="assets/death3.png" alt="death3">
         </div>
-        <div id = "life1">
+        <div id="life1">
             <img src="assets/life1.png" alt="life1">
         </div>
-        <div id = "life2">
+        <div id="life2">
             <img src="assets/life2.png" alt="life2">
         </div>
-        <div id = "life3">
+        <div id="life3">
             <img src="assets/life3.png" alt="life3">
         </div>
-        <div id = "crystalball">
+        <div id="crystalball">
             <img src="assets/crystalball.png" alt="crystalball">
         </div>
         <div id="score">Score <b>0</b></div>
         <div id="gameOver">
-            <img src="assets/gameover.png" alt ="gameover">
+            <img src="assets/gameover.png" alt="gameover">
+        </div>
+        <div id="plus">
+            <img src="assets/plus.png" alt="plus">
         </div>
     </div>
 
     <!-- 로딩 인디케이터 -->
-<div id="loadingIndicator" style="display: none;">
-    <div class="loader"></div>
-    <p>Loading...</p>
-</div>
+    <div id="loadingIndicator" style="display: none;">
+        <div class="loader"></div>
+        <p>Loading...</p>
+    </div>
     <!-- 
     <div>Teachable Machine Pose Model</div>
     <button type="button" onclick="init()">Start</button>-->
-    <div><canvas id="canvas"></canvas></div>
-    <div id="label-container"></div>
-    <div>
-        <canvas id="image-canvas"></canvas>
-    </div>
+    <div style="display: none;"><canvas id="canvas"></canvas></div>
+    <div id="label-container" style="display: none;"></div>
+    <div style="display: none;"><canvas id="image-canvas"></canvas></div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
     <script type="text/javascript">
-        const URL = "https://teachablemachine.withgoogle.com/models/EsuE2GgJp/";
+        const URL = "https://teachablemachine.withgoogle.com/models/y-4mlqsZq/";
         let model, webcam, ctx, labelContainer, maxPredictions;
         let characterJumping = false;
 
@@ -105,40 +105,41 @@
         }
 
         async function predict() {
-    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
-    const prediction = await model.predict(posenetOutput);
+            const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+            const prediction = await model.predict(posenetOutput);
 
-    for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction =
-            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        labelContainer.childNodes[i].innerHTML = classPrediction;
-    }
+            // for (let i = 0; i < maxPredictions; i++) {
+            //     const classPrediction =
+            //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            //     labelContainer.childNodes[i].innerHTML = classPrediction;
+            // }
 
-    drawPose(pose);
+            drawPose(pose);
 
-    const jumpThreshold = 0.9;
-    const characterElement = document.getElementById("character");
+            const jumpThreshold = 0.9;
+            const characterElement = document.getElementById("character");
 
-    if (prediction[0].probability >= jumpThreshold && !characterJumping) {
-        characterElement.classList.add("characterActive");
-        characterJumping = true;
-        setTimeout(() => {
-            characterElement.classList.remove("characterActive");
-            characterJumping = false;
-        }, 2000); // 애니메이션의 지속 시간 (2초)에 맞춰 클래스 제거
-    }
-}
+            if (prediction[0].probability >= jumpThreshold && !characterJumping) {
+                characterElement.classList.add("characterActive");
+                characterJumping = true;
+                setTimeout(() => {
+                    characterElement.classList.remove("characterActive");
+                    characterJumping = false;
+                }, 2000); // 애니메이션의 지속 시간 (2초)에 맞춰 클래스 제거
+            }
+        }
         function drawPose(pose) {
             //if (webcam.canvas) {
-                //ctx.drawImage(webcam.canvas, 0, 0);
-                //if (pose) {
-                //    const minPartConfidence = 0.5;
-                 //   tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
-                 //   tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
-                //}
-            }
+            //ctx.drawImage(webcam.canvas, 0, 0);
+            //if (pose) {
+            //    const minPartConfidence = 0.5;
+            //   tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+            //   tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+            //}
+        }
        // }
     </script>
-    <script src="js/Game_past.js"></script>    
+    <script src="js/Game_past.js"></script>
 </body>
+
 </html>
