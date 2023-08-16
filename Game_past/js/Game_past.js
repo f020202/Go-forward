@@ -73,6 +73,18 @@ window.addEventListener("keydown", async (start) => {
     }
 });
 
+// jump Your Character
+window.addEventListener("keydown", (e) => {
+    if (e.key == "ArrowUp")
+        if (character.classList != "characterActive") {
+            character.classList.add("characterActive");
+            //  remove class after 0.5 seconds
+            setTimeout(() => {
+                character.classList.remove("characterActive");
+            }, 500);
+        }
+});
+
 async function init() {
     // 로딩 인디케이터 표시
     blockGame();
