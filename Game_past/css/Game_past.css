@@ -13,7 +13,7 @@ body {
 
 #container {
     height: 400px;
-    width: 1200px;
+    width: 1600px;
     position: relative;
     overflow: hidden;
 }
@@ -60,14 +60,14 @@ body {
 
 #container #road {
     height: 400px;
-    width: 3000px;
+    width: 4150px;
     position: absolute;
     bottom: 0;
 }
 
 #container #road img {
     height: 400px;
-    width: 3300px;
+    width: 4396px;
     position: absolute;
     left: 0px;
     animation: none;
@@ -133,7 +133,7 @@ body {
 }
 
 .blockActive {
-    animation: blockAnimate 5s linear infinite;
+    animation: blockAnimate 7s linear infinite;
 }
 
 @keyframes blockAnimate {
@@ -190,8 +190,8 @@ body {
     height: auto;
     width: auto;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px; 
+    right: 120px;
 }
 
 #gameOver {
@@ -204,6 +204,7 @@ body {
     height: 80px;
     color: #525252;
 }
+
 #gameclear {
     z-index: 10;
     display: none;
@@ -241,8 +242,6 @@ body {
     width: 50px;
 }
 
-
-
 .characterActive {
     animation: parabolicJump 2s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -252,13 +251,12 @@ body {
         transform: translateY(0);
     }
     25% {
-        transform: translateY(-200px);  /* 점프의 최대 높이 */
+        transform: translateY(-150px);  /* 점프의 최대 높이 */
     }
     50% {
         transform: translateY(0);
     }
 }
-
 
 #loadingIndicator {
     position: fixed;
@@ -299,5 +297,3 @@ body {
 .flashEffect {
     animation: flash 0.2s linear infinite;
 }
-
-
