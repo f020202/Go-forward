@@ -156,7 +156,7 @@ body {
 }
 
 .monsterActive {
-    animation: blockAnimate 6s linear infinite;
+    animation: blockAnimate 20s linear infinite;
 }
 
 @keyframes monsterAnimate {
@@ -210,10 +210,20 @@ body {
     display: none;
     font-size: 70px;
     position: absolute;
-    left:500px;
+    left:350px;
     width: 362px;
     height: 80px;
-    top:50px;
+    color: #525252;
+}
+
+#stage_success {
+    z-index: 10;
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left:350px;
+    width: 362px;
+    height: 80px;
     color: #525252;
 }
 
@@ -228,6 +238,21 @@ body {
 }
 
 #container #exclamation img {
+    height: 50px;
+    width: 50px;
+}
+
+#container #plus {
+    z-index: 10;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 150px; 
+    bottom:280px;
+    display: none; 
+}
+
+#container #plus img {
     height: 50px;
     width: 50px;
 }
