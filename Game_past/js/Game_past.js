@@ -131,8 +131,6 @@ function checkGameStatus() {
         gameRunning = false;
         if (playerScore >= 5) {
             document.getElementById("gameclear").style.display = "block";
-        } else {
-            document.getElementById("stage_success").style.display = "block";
         }
         block.style.animation = "";
         crystalball.style.animation = "";

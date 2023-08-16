@@ -210,20 +210,10 @@ body {
     display: none;
     font-size: 70px;
     position: absolute;
-    left:350px;
+    left:500px;
     width: 362px;
     height: 80px;
-    color: #525252;
-}
-
-#stage_success {
-    z-index: 10;
-    display: none;
-    font-size: 70px;
-    position: absolute;
-    left:350px;
-    width: 362px;
-    height: 80px;
+    top:50px;
     color: #525252;
 }
 
