@@ -8,6 +8,24 @@ let score = document.querySelector("#score");
 let gameOver = document.querySelector("#gameOver");
 let crystalballCount = 0; // Count crystalball appearances
 
+let userID; // 사용자 ID를 저장할 변수
+let crystalValue; // 어떤 방법으로든 crystalValue를 가져옵니다
+
+// 사용자 ID 가져오기
+fetch('/get-userID')
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        userID = data.userID;
+        localStorage.setItem('userID', userID);
+    } else {
+        console.error("Error getting the userID:", data.message);
+    }
+})
+.catch(error => {
+    console.error('Error while trying to fetch userID:', error);
+});
+
 // Life elements
 let life1 = document.querySelector("#life1");
 let life2 = document.querySelector("#life2");
@@ -71,6 +89,18 @@ window.addEventListener("keydown", async (start) => {
         // Teachable Machine Pose Model 초기화
         await init();
     }
+});
+
+// jump Your Character
+window.addEventListener("keydown", (e) => {
+    if (e.key == "ArrowUp")
+        if (character.classList != "characterActive") {
+            character.classList.add("characterActive");
+            //  remove class after 0.5 seconds
+            setTimeout(() => {
+                character.classList.remove("characterActive");
+            }, 500);
+        }
 });
 
 async function init() {
@@ -148,13 +178,78 @@ function pauseGame() {
 }
 
 function showExclamationAndRedirect() {
-    pauseGame(); // 게임을 일시 중지
+    var userID = localStorage.getItem('userID');  // 로컬 스토리지에서 userID 가져오기
+
+    pauseGame();
     let exclamation = document.querySelector("#exclamation");
-    exclamation.style.display = "block"; // 느낌표 보이기
+    exclamation.style.display = "block";
     setTimeout(() => {
-        exclamation.style.display = "none"; // 느낌표 숨기기
+        exclamation.style.display = "none";
         window.location.href = "../Event/teachable_machine_pose/index.html"; // 새 페이지로 이동
-    }, 3000); // 3초 후 실행
+    }, 3000);
+
+    fetch(`/get-username?id=${userID}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log("data.success:", data.success);
+        if (data.success) {
+            let userName = data.username;
+            console.log("User Name:", userName);
+
+            saveScoreToDB(playerScore);
+            console.log("Attempting to update score in database for user:", userName, "with score:", playerScore);
+
+            updateCrystalValue(playerScore); // 크리스탈 값을 playerScore로 업데이트
+        } else {
+            console.log('User not found');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching the user:', error);
+    });
+}
+
+
+function updateCrystalValue(value) {
+    fetch('/update-crystal-past', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userID, crystalValue: value })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log(data.message);
+        } else {
+            console.error("Error updating the crystal value:", data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error updating the crystal value:', error.message);
+    });
+}
+
+function saveScoreToDB(score) {
+    fetch('/save-score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ score: score })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Score successfully saved:', data.message);
+        } else {
+            console.error("Error saving the score:", data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error while trying to save score:', error);
+    });
 }
 
 function showplus() {
@@ -165,12 +260,11 @@ function showplus() {
     }, 500); // 1초 후 실행
 }
 
+
 //'Game Over' if 'Character' hit The 'Block' 
 let result = setInterval(() => {
     let characterBottom = parseInt(getComputedStyle(character).getPropertyValue("bottom"));
-    let characterTop = parseInt(getComputedStyle(character).getPropertyValue("top"));
     let blockLeft = parseInt(getComputedStyle(block).getPropertyValue("left"));
-    let crystalballLeft = parseInt(getComputedStyle(crystalball).getPropertyValue("left"));
     let monsterLeft = parseInt(getComputedStyle(monster).getPropertyValue("left")); // monster의 left 위치
 
     let characterRect = character.getBoundingClientRect();
@@ -214,6 +308,8 @@ let result = setInterval(() => {
                 clearInterval(interval);
                 playerScore = 0;
                 gameRunning = false;
+                saveScoreToDB(playerScore);
+                playerScore = 0;
             }
         }
 
@@ -228,6 +324,9 @@ let result = setInterval(() => {
         if (!scoreAdded) {
             playerScore += 1;
             score.innerHTML = `Score <b>${playerScore}</b>`;
+            updateCrystalValue(1); // 크리스탈볼과 캐릭터가 충돌할 때 크리스탈 값을 1로 업데이트
+            saveScoreToDB(playerScore);
+            console.log("Player score before sending:", playerScore);
             scoreAdded = true;
             
             // 캐릭터와 수정구가 충돌했을 때
@@ -235,6 +334,7 @@ let result = setInterval(() => {
             crystalballHitCount++;  // 충돌 횟수 증가
             if (crystalballHitCount >= 5) { // 충돌 횟수가 5회 이상이면 게임 상태 확인
                 checkGameStatus();
+                saveScoreToDB(playerScore);
             }
         }
     } else {
