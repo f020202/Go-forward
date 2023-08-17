@@ -102,6 +102,16 @@
     });
 
     updatePolygonPosition(); // Call the function initially to set the initial position
+
+   // 로그인 요청 및 응답 처리
+   fetch('/login', { /* ... (나머지 로그인 요청에 필요한 설정) ... */ })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            localStorage.setItem('userID', data.userID);
+        }
+    });
+
   </script>
 </body>
 </html>
