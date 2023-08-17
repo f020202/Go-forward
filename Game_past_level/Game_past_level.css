@@ -1,0 +1,54 @@
+body {
+    height: 100%;
+    margin: 0;
+    background-image: url('past_level.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.cache {
+    display: flex;
+    margin-top: 30%;
+    margin-left: 12%;
+}
+
+.cache img {
+    width: 200px;
+    height: auto;
+}
+
+.lock1 {
+    /* visibility: hidden; */
+    margin-left: 10%;
+    margin-top: 40%;
+}
+
+.lock1 img {
+    width: 70px;
+    height: 80px;
+}
+
+.lock2 {
+    margin-left: 16.3%;
+    margin-top: 40%;
+}
+
+.lock2 img {
+    width: 70px;
+    height: 80px;
+}
+
+.lock3 {
+    margin-left: 16.8%;
+    margin-top: 40%;
+}
+
+.lock3 img {
+    width: 70px;
+    height: 80px;
+}

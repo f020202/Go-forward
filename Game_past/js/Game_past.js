@@ -264,9 +264,7 @@ function showplus() {
 //'Game Over' if 'Character' hit The 'Block' 
 let result = setInterval(() => {
     let characterBottom = parseInt(getComputedStyle(character).getPropertyValue("bottom"));
-    let characterTop = parseInt(getComputedStyle(character).getPropertyValue("top"));
     let blockLeft = parseInt(getComputedStyle(block).getPropertyValue("left"));
-    let crystalballLeft = parseInt(getComputedStyle(crystalball).getPropertyValue("left"));
     let monsterLeft = parseInt(getComputedStyle(monster).getPropertyValue("left")); // monster의 left 위치
 
     let characterRect = character.getBoundingClientRect();

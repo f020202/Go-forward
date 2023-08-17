@@ -1,0 +1,44 @@
+body {
+    height: 100%;
+    margin: 0;
+    background-image: url('future_level.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+}
+.cache {
+    display: flex;
+    margin-top: 37%;
+    margin-left: 13%;
+}
+.cache img {
+    width: 200px;
+    height: auto;
+}
+.lock1 {
+    margin-left: 10.7%;
+    margin-top: 44%;
+ }
+ .lock1 img{
+     width: 70px;
+     height: 80px;
+ }
+ .lock2 {
+     margin-left: 16%;
+     margin-top: 44%;
+  }
+  .lock2 img{
+      width: 70px;
+      height: 80px;
+  }
+  .lock3 {
+     margin-left: 15.8%;
+     margin-top: 44%;
+  }
+  .lock3 img{
+      width: 70px;
+      height: 80px;
+  }
