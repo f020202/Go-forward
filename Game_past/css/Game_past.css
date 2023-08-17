@@ -92,7 +92,7 @@ body {
 
 /* red flash class */
 .redFlash {
-    filter: hue-rotate(-360deg) saturate(200%);
+    filter: hue-rotate(-180deg) saturate(200%);
 }
 
 #container #character {
@@ -198,8 +198,8 @@ body {
     display: none;
     font-size: 70px;
     position: absolute;
-    left: calc(50% - 150px);
-    top: calc(50% - 70px);
+    left: calc(50% - 230px);
+    top: calc(50% - 140px);
     width: 362px;
     height: 80px;
     color: #525252;

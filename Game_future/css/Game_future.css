@@ -177,8 +177,8 @@ body {
     display: none;
     font-size: 70px;
     position: absolute;
-    left: calc(50% - 150px);
-    top: calc(50% - 70px);
+    left: calc(50% - 230px);
+    top: calc(50% - 140px);
     width: 362px;
     height: 80px;
     color: #525252;
