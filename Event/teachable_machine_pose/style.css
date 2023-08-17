@@ -11,7 +11,7 @@
 .container h3{
   display : flex;
   color : white;
-  margin-left : 12%;
+  margin-left : 10%;
   word-spacing : 290px;
   font-size : 30px;
 }
@@ -44,7 +44,7 @@ html {
   }
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 1.3rem;
 }
 
@@ -60,9 +60,11 @@ html {
 
 ::-webkit-scrollbar-track {
   background: #f9f9f9;
-}
+} */
 
 body {
+  height: 100vh;
+  overflow-y: hidden;  /* 스크롤을 막기 위해 */
   font-size: 1.6rem;
   background: var(--bg);
 }
@@ -305,8 +307,9 @@ body {
   animation: fireAnimation 1s ease-in-out;
 }
 .character {
+  /* display: none; */
   position: absolute;
-  top: 100%;
+  top: 82%;
   left: 50%; 
   transform: translate(-50%, -50%);
   z-index: 2; /* 다른 요소들보다 앞에 나타나도록 설정 */
@@ -314,7 +317,7 @@ body {
   
 .sec img,
 .character img {
-  width: 50%;
+  width: 40%;
   height: auto;
   object-fit: contain;
 }
