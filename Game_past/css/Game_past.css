@@ -92,7 +92,7 @@ body {
 
 /* red flash class */
 .redFlash {
-    filter: hue-rotate(-180deg) saturate(200%);
+    filter: hue-rotate(160deg) saturate(220%);
 }
 
 #container #character {
@@ -123,13 +123,13 @@ body {
     height: 28px;
     width: 50px;
     position: absolute;
-    bottom: 70px;
+    bottom: 90px;
     right: -20px;
 }
 
 #container #block img {
-    height: 28px;
-    width: 50px;
+    height: 70px;
+    width: 100px;
 }
 
 .blockActive {
@@ -210,18 +210,8 @@ body {
     display: none;
     font-size: 70px;
     position: absolute;
-    left:350px;
-    width: 362px;
-    height: 80px;
-    color: #525252;
-}
-
-#stage_success {
-    z-index: 10;
-    display: none;
-    font-size: 70px;
-    position: absolute;
-    left:350px;
+    top:40px;
+    left:500px;
     width: 362px;
     height: 80px;
     color: #525252;
@@ -286,29 +276,11 @@ body {
     align-items: center;
 }
 
-.loader {
-    border: 5px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 5px solid #3498db;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes flash {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-}
-
-.flashEffect {
-    animation: flash 0.2s linear infinite;
+.loading{
+    width:500px;
+    height:auto;
+    justify-content: center;
+    align-items: center;
+    margin-left:500px;
+    margin-top: 200px;
 }
