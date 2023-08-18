@@ -15,8 +15,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // 정적 파일 제공 설정
 app.use('/Event', express.static(path.join(__dirname, 'Event')));
 app.use('/Game_future', express.static(path.join(__dirname, 'Game_future')));
+app.use('/Game_future_level', express.static(path.join(__dirname, 'Game_future_level')));
 app.use('/Game_past', express.static(path.join(__dirname, 'Game_past')));
+app.use('/Game_past_2', express.static(path.join(__dirname, 'Game_past_2')));
+app.use('/Game_past_level', express.static(path.join(__dirname, 'Game_past_level')));
 app.use('/Game_present', express.static(path.join(__dirname, 'Game_present')));
+app.use('/Game_present_level', express.static(path.join(__dirname, 'Game_present_level')));
 app.use('/Main', express.static(path.join(__dirname, 'Main')));
 app.use('/Map', express.static(path.join(__dirname, 'Map')));
 
@@ -105,6 +109,30 @@ app.post('/update-crystal-past', (req, res) => {
       return res.json({ success: true, message: 'Value updated successfully!' });
   });
 });
+
+app.get('/get-score', (req, res) => {
+  if (!authCheck.isOwner(req, res)) {
+    return res.status(401).json({ success: false, message: 'Not authorized' });
+  }
+
+  const currentUser = req.session.nickname;
+  const sql = `SELECT crystal_past FROM usertable WHERE username = ?`;
+  
+  db.query(sql, [currentUser], function(error, results) {
+    if (error) {
+        console.error('Error fetching the score:', error);
+        return res.status(500).json({ success: false, message: 'Database error' });
+    }
+
+    if (results.length > 0) {
+        const score = results[0].crystal_past;
+        res.json({ success: true, score });
+    } else {
+        res.status(404).json({ success: false, message: 'User not found' });
+    }
+  });
+});
+
 
 
 app.listen(port, () => {
