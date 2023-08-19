@@ -44,7 +44,7 @@
   <div class="content">
     <img src="gofo.png" alt="gofo">
     <p></p>
-    <a href="p2.html">
+    <a href="../Map/Map.html">
       <img src="start.png" alt="start">
     </a>
     <div class="polygon start"></div>
@@ -90,7 +90,7 @@
       } else if (e.code === 'Enter') {
         if (arrow_num == 0) {
           console.log('0입니다')
-          location.href = 'p2.html'; // Changed to 'p2.html'
+          location.href = '../Map/Map.html'; // Changed to 'p2.html'
         } else if (arrow_num == 1) {
           console.log('1입니다')
           location.href = 'p2.html'; // Changed to 'p2.html'
@@ -102,6 +102,16 @@
     });
 
     updatePolygonPosition(); // Call the function initially to set the initial position
+
+   // 로그인 요청 및 응답 처리
+   fetch('/login', { /* ... (나머지 로그인 요청에 필요한 설정) ... */ })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            localStorage.setItem('userID', data.userID);
+        }
+    });
+
   </script>
 </body>
 </html>

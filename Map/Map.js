@@ -9,7 +9,7 @@ arrow_image.src = 'arrow.png';
 
 
 var arrow = {
-    x: 310,
+    x: 170,
     y: 110,
     width: 110,
     height: 85,
@@ -40,7 +40,7 @@ document.addEventListener('keydown',function(e){
         if(e.code === 'ArrowRight'){
             arrowright = true;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            arrow.x += 390;
+            arrow.x += 490;
             arrow.draw();
             arrow_num ++;
             console.log(arrow_num);
@@ -55,7 +55,7 @@ document.addEventListener('keydown',function(e){
         if(e.code === 'ArrowLeft'){
             arrowright = true;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            arrow.x -= 390;
+            arrow.x -= 490;
             arrow.draw();
             arrow_num --;
             console.log(arrow_num);
@@ -66,16 +66,13 @@ document.addEventListener('keydown',function(e){
 document.addEventListener('keydown',function(e){
     if(e.code === 'Enter'){
         if(arrow_num==0){
-            console.log('0입니다')
-            location.href = 'Game_future.html';
+            location.href = '../Game_future_level/Game_future_level.html';
         }
         else if(arrow_num==1){
-            console.log('1입니다')
-            location.href = 'Game_future.html';
+            location.href = '../Game_present_level/Game_present_level.html';
         }
         else if(arrow_num==2){
-            console.log('2입니다')
-            location.href = 'Game_future.html';
+            location.href = '../Game_past_level/Game_past_level.html';
         }
     }
 })

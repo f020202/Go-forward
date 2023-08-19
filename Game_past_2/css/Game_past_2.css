@@ -1,0 +1,314 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+#container {
+    height: 400px;
+    width: 1600px;
+    position: relative;
+    overflow: hidden;
+}
+
+#container #death1{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+#container #death2{
+    height: 20px;
+    width: 20px;
+    left: 50px;
+    position: absolute;
+}
+
+#container #death3{
+    height: 20px;
+    width: 20px;
+    left: 100px;
+    position: absolute;
+}
+
+#container #life1{
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+#container #life2{
+    height: 20px;
+    width: 20px;
+    left: 50px;
+    position: absolute;
+}
+
+#container #life3{
+    height: 20px;
+    width: 20px;
+    left: 100px;
+    position: absolute;
+}
+
+#container #road {
+    height: 400px;
+    width: 4150px;
+    position: absolute;
+    bottom: 0;
+}
+
+#container #road img {
+    height: 400px;
+    width: 4396px;
+    position: absolute;
+    left: 0px;
+    animation: none;
+    opacity: 0.9;
+}  
+
+@keyframes roadAnimate {
+    0% {left: 0px;}
+    100% {left: -70%;}
+}
+
+/* bounce animation */
+@keyframes bounce {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-100px); }
+    100% { transform: translateX(0); }
+}
+
+.bounce {
+    animation: bounce 0.5s linear;
+}
+
+/* red flash class */
+.redFlash {
+    filter: hue-rotate(-360deg) saturate(200%);
+}
+
+#container #character {
+    height: 70px;
+    width: 70px;
+    position: absolute;
+    bottom: 35px;
+    left: 20px;
+}
+
+#container #character img {
+    height: 70px;
+    width: 70px;
+}
+
+.characterActive {
+    animation: animateCharacter 0.5s linear infinite;
+}
+
+@keyframes animateCharacter {
+    0%,
+    100% { bottom: 28px; }
+    45%,
+    55% { bottom: 180px; }
+}
+
+#container #block {
+    height: 28px;
+    width: 50px;
+    position: absolute;
+    bottom: 70px;
+    right: -20px;
+}
+
+#container #block img {
+    height: 28px;
+    width: 50px;
+}
+
+.blockActive {
+    animation: blockAnimate 7s linear infinite;
+}
+
+@keyframes blockAnimate {
+    0% { right: -125px; }
+    100% { right: 100%; }
+}
+
+#container #monster {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    bottom: 70px;
+    right: -20px;
+    opacity: 0;
+}
+
+#container #monster img {
+    height: 50px;
+    width: 50px;
+}
+
+.monsterActive {
+    animation: blockAnimate 20s linear infinite;
+}
+
+@keyframes monsterAnimate {
+    0% { right: -125px; }
+    100% { right: 100%; }
+}
+
+#container #crystalball {
+    height: 28px;
+    width: 50px;
+    position: absolute;
+    bottom: 250px;
+    right: -20px;
+}
+
+#container #crystalball img {
+    height: 70px;
+    width: 70px;
+}
+
+.crystalballActive {
+    animation: crystalballAnimate 4s linear infinite;
+}
+
+@keyframes crystalballAnimate {
+    0% { right: -250px; }
+    100% { right: 100%; }
+}
+
+#score {
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: 15px; 
+    right: 120px;
+}
+
+#gameOver {
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(50% - 70px);
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
+
+#gameclear {
+    z-index: 10;
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left:350px;
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
+
+#stage_success {
+    z-index: 10;
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left:350px;
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
+
+#container #exclamation {
+    z-index: 10;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 100px; 
+    bottom: 100px;
+    display: none; 
+}
+
+#container #exclamation img {
+    height: 50px;
+    width: 50px;
+}
+
+#container #plus {
+    z-index: 10;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 150px; 
+    bottom:280px;
+    display: none; 
+}
+
+#container #plus img {
+    height: 50px;
+    width: 50px;
+}
+
+.characterActive {
+    animation: parabolicJump 2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes parabolicJump {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-150px);  /* 점프의 최대 높이 */
+    }
+    50% {
+        transform: translateY(0);
+    }
+}
+
+#loadingIndicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #3498db;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes flash {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.flashEffect {
+    animation: flash 0.2s linear infinite;
+}
