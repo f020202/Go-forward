@@ -67,15 +67,15 @@ document.addEventListener('keydown',function(e){
     if(e.code === 'Enter'){
         if(arrow_num==0){
             console.log('0입니다')
-            location.href = 'Game_future.html';
+            location.href = '../Game_future_level/Game_future_level.html';
         }
         else if(arrow_num==1){
             console.log('1입니다')
-            location.href = '../Game_present/Game_present.html';
+            location.href = '../Game_present_level/Game_present_level.html';
         }
         else if(arrow_num==2){
             console.log('2입니다')
-            location.href = '../Game_past/Game_past.html';
+            location.href = '../Game_past_level/Game_past_level.html';
         }
     }
 })
