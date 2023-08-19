@@ -9,8 +9,8 @@ arrow_image.src = 'arrow.png';
 
 
 var arrow = {
-    x: 170,
-    y: 110,
+    x: 180,
+    y: 145,
     width: 110,
     height: 85,
     draw() {
@@ -40,7 +40,7 @@ document.addEventListener('keydown',function(e){
         if(e.code === 'ArrowRight'){
             arrowright = true;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            arrow.x += 490;
+            arrow.x += 472;
             arrow.draw();
             arrow_num ++;
             console.log(arrow_num);
@@ -55,7 +55,7 @@ document.addEventListener('keydown',function(e){
         if(e.code === 'ArrowLeft'){
             arrowright = true;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            arrow.x -= 490;
+            arrow.x -= 472;
             arrow.draw();
             arrow_num --;
             console.log(arrow_num);

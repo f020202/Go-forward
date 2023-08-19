@@ -13,7 +13,7 @@ document.addEventListener("keydown", (event) => {
     } else if (event.key === "ArrowLeft" && currentPosition > minPosition) {
         currentPosition -= 310;
         player.style.transform = `translateX(${currentPosition}px)`;
-    } else if (event.key === " ") {
+    } else if (event.key === "Enter") {
         // 스페이스바를 눌렀을 때의 처리
         if ((currentPosition === 310 && window.getComputedStyle(lock1).visibility === 'visible') ||
             (currentPosition === 620 && window.getComputedStyle(lock2).visibility === 'visible') ||
