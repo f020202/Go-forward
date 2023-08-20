@@ -260,6 +260,33 @@ function showplus() {
     }, 500); // 1초 후 실행
 }
 
+//생명저장함수
+function saveLivesToDB(lives) {
+    // API 엔드포인트 정의
+    let url = "/save-lives";
+
+    // 전송될 데이터
+    let data = {
+        lives: lives
+    };
+
+    // fetch API 호출
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("생명 수가 성공적으로 저장되었습니다:", data);
+    })
+    .catch((error) => {
+        console.error("생명 수 저장 오류:", error);
+    });
+}
+
 
 //'Game Over' if 'Character' hit The 'Block' 
 let result = setInterval(() => {
@@ -282,6 +309,7 @@ let result = setInterval(() => {
         // 캐릭터와 몬스터가 충돌한 경우의 로직
         if (monsterLeft < 50 && monsterLeft > 20 && characterBottom < 90) {
             showExclamationAndRedirect();
+            saveLivesToDB(lives.length);
         }
     }
 
@@ -302,6 +330,7 @@ let result = setInterval(() => {
             }, 1000);
             if (lives.length <= 0) {
                 gameOver.style.display = "block";
+                saveLivesToDB(lives.length);
                 block.classList.remove("blockActive");
                 crystalball.classList.remove("crystalballActive");
                 road.firstElementChild.style.animation = "none";
@@ -324,11 +353,10 @@ let result = setInterval(() => {
         if (!scoreAdded) {
             playerScore += 1;
             score.innerHTML = `Score <b>${playerScore}</b>`;
-            updateCrystalValue(1); // 크리스탈볼과 캐릭터가 충돌할 때 크리스탈 값을 1로 업데이트
+            //updateCrystalValue(1); // 크리스탈볼과 캐릭터가 충돌할 때 크리스탈 값을 1로 업데이트
             saveScoreToDB(playerScore);
             console.log("Player score before sending:", playerScore);
             scoreAdded = true;
-            
             // 캐릭터와 수정구가 충돌했을 때
             showplus();
             crystalballHitCount++;  // 충돌 횟수 증가
@@ -340,4 +368,4 @@ let result = setInterval(() => {
     } else {
         scoreAdded = false;
     }
-}, 10);
+}, 10); 
