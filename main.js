@@ -96,6 +96,34 @@ app.post('/save-score', (req, res) => {
   });
 });
 
+app.post('/save-score-history', (req, res) => {
+  const userID = req.session.userID; // 로그인된 사용자의 ID를 세션에서 가져옵니다.
+  
+  // 현재 점수 값을 불러옵니다.
+  var fetchSql = `SELECT crystal_past FROM userTable WHERE id = ?`;
+  db.query(fetchSql, [userID], function(error, results) {
+      if (error) {
+          console.error("Error fetching the current score:", error);
+          return res.status(500).json({ success: false, message: 'Server error' });
+      }
+
+      // 현재 점수 값에 +1을 합니다.
+      const currentScore = results[0].crystal_past;
+      const newScore = currentScore + 1;
+
+      // 업데이트 쿼리
+      var updateSql = `UPDATE userTable SET crystal_past = ? WHERE id = ?`;
+      db.query(updateSql, [newScore, userID], function(error, results) {
+          if (error) {
+              console.error("Error saving the score:", error);
+              return res.status(500).json({ success: false, message: 'Server error' });
+          }
+          console.log("Score updated:", newScore);
+          return res.json({ success: true, message: 'Score updated successfully.' });
+      });
+  });
+});
+
 app.post('/update-crystal-past', (req, res) => {
   const userID = req.session.userID; // 로그인된 사용자의 ID를 세션에서 가져옵니다.
   const { crystalValue } = req.body;
@@ -132,6 +160,73 @@ app.get('/get-score', (req, res) => {
     }
   });
 });
+
+app.get('/get-life', (req, res) => {
+  if (!authCheck.isOwner(req, res)) {
+    return res.status(401).json({ success: false, message: 'Not authorized' });
+  }
+
+  const currentUser = req.session.nickname;
+  const sql = `SELECT life FROM usertable WHERE username = ?`;
+
+  db.query(sql, [currentUser], function(error, results) {
+    if (error) {
+      console.error('Error fetching the life value:', error);
+      return res.status(500).json({ success: false, message: 'Database error' });
+    }
+
+    if (results.length > 0) {
+      const life = results[0].life;
+      res.json({ success: true, life });
+    } else {
+      res.status(404).json({ success: false, message: 'User not found' });
+    }
+  });
+});
+
+app.post('/save-lives', (req, res) => {
+  const lives = req.body.lives;
+  const userID = req.session.userID; // 로그인된 사용자의 ID를 세션에서 가져옵니다.
+  
+  var sql = `UPDATE userTable SET life = ? WHERE id = ?`; // 테이블의 컬럼명은 'life'로 변경
+  db.query(sql, [lives, userID], function(error, results) { // 변수명을 'lives'로 통일
+      if (error) {
+          console.error("Error saving the lives:", error);
+          return res.status(500).json({ success: false, message: 'Server error' });
+      }
+      console.log("Lives saved:", lives);
+      return res.json({ success: true, message: 'Lives saved successfully.' });
+  });
+});
+
+app.post('/update-life', async (req, res) => {
+  const userID = req.session.userID; // 로그인된 사용자의 ID를 세션에서 가져옵니다.
+
+  // 먼저 현재의 life 값을 불러옵니다.
+  var fetchSql = `SELECT life FROM userTable WHERE id = ?`;
+  db.query(fetchSql, [userID], function(error, results) {
+      if (error) {
+          console.error("Error fetching the current life:", error);
+          return res.status(500).json({ success: false, message: 'Server error' });
+      }
+
+      // 현재 life 값에서 1을 뺍니다.
+      const currentLife = results[0].life;
+      const newLife = currentLife - 1;
+
+      // 업데이트 쿼리를 실행하여 life 값을 갱신합니다.
+      var updateSql = `UPDATE userTable SET life = ? WHERE id = ?`;
+      db.query(updateSql, [newLife, userID], function(error, results) {
+          if (error) {
+              console.error("Error updating the life:", error);
+              return res.status(500).json({ success: false, message: 'Server error' });
+          }
+          console.log("Life updated:", newLife);
+          return res.json({ success: true, message: 'Life updated successfully.' });
+      });
+  });
+});
+
 
 
 
