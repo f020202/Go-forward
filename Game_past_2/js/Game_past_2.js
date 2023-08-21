@@ -333,21 +333,26 @@ async function getScoreFromDB() {
 
 async function checkGameStatus() {
     let scoreFromDB = await getScoreFromDB();
-
     if (scoreFromDB >= 5) {  // 데이터베이스로부터 가져온 점수가 5 이상일 때
         block.classList.remove("blockActive");
         crystalball.classList.remove("crystalballActive");
         road.firstElementChild.style.animation = "none";
         clearInterval(result);
         gameRunning = false;
-        if (scoreFromDB >= 5) {
-            document.getElementById("gameclear").style.display = "block";
-        }
+    
+        // 게임 클리어 메시지를 표시합니다
+        document.getElementById("gameclear").style.display = "block";
+        
+        // menu2 요소를 표시합니다
+        document.getElementById("menu2").style.display = "block";
+        
+        // 애니메이션을 초기화합니다
         block.style.animation = "";
         crystalball.style.animation = "";
         character.style.animation = "";
         gameRunning = true;
     }
+    
 }
 
 function pauseGame() {
@@ -534,6 +539,8 @@ let result = setInterval(async () => {
                 gameRunning = false;
                 saveScoreToDB(playerScore);
                 playerScore = 0;
+                // "gameOver" div와 함께 "menu" div를 표시합니다
+                menu.style.display = "block";
             }
         }
     }
