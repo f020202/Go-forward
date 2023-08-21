@@ -198,8 +198,8 @@ body {
     display: none;
     font-size: 70px;
     position: absolute;
-    left: calc(50% - 150px);
-    top: calc(50% - 70px);
+    left: calc(50% - 220px);
+    top: calc(50% - 180px);
     width: 362px;
     height: 80px;
     color: #525252;
@@ -210,10 +210,15 @@ body {
     display: none;
     font-size: 70px;
     position: absolute;
-    left:350px;
+    left: calc(50% - 200px);
+    top: calc(30px);
     width: 362px;
     height: 80px;
     color: #525252;
+}
+#gameclear img {
+    height: 200px;
+    width: 350px;
 }
 
 #stage_success {
@@ -311,4 +316,35 @@ body {
 
 .flashEffect {
     animation: flash 0.2s linear infinite;
+}
+
+#container #menu {
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left: calc(50% - 120px);
+    top: calc(50% + 30px);
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
+
+#container #menu img {
+    height: 50px;
+    width: 150px;
+}
+#container #menu2 {
+    display: none;
+    font-size: 70px;
+    position: absolute;
+    left: calc(50% - 120px);
+    top: calc(50% + 30px);
+    width: 362px;
+    height: 80px;
+    color: #525252;
+}
+
+#container #menu2 img {
+    height: 50px;
+    width: 150px;
 }
