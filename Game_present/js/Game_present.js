@@ -156,6 +156,7 @@ function checkGameStatus() {
     if (crystalballHitCount >= 5) {  // 캐릭터와 수정구가 5번 충돌했을 때
         block.classList.remove("blockActive");
         crystalball.classList.remove("crystalballActive");
+        monster.classList.remove("monsterActive");  // 몬스터 애니메이션 일시 중지
         road.firstElementChild.style.animation = "none";
         clearInterval(result);
         gameRunning = false;
@@ -173,6 +174,7 @@ function pauseGame() {
     road.firstElementChild.style.animation = "none"; // 도로 애니메이션 중지
     block.classList.remove("blockActive"); // 블록 애니메이션 중지
     crystalball.classList.remove("crystalballActive"); // 크리스탈볼 애니메이션 중지
+    monster.classList.remove("monsterActive");  // 몬스터 애니메이션 일시 중지
     clearInterval(result); // 게임 로직 중지
     gameRunning = false; // 게임 상태를 중지로 설정
 }
@@ -333,6 +335,7 @@ let result = setInterval(() => {
                 saveLivesToDB(lives.length);
                 block.classList.remove("blockActive");
                 crystalball.classList.remove("crystalballActive");
+                monster.classList.remove("monsterActive");  // 몬스터 애니메이션 일시 중지
                 road.firstElementChild.style.animation = "none";
                 clearInterval(interval);
                 playerScore = 0;
