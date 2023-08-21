@@ -67,7 +67,7 @@ document.addEventListener('keydown',function(e){
     if(e.code === 'Enter'){
         if(arrow_num==0){
             console.log('0입니다')
-            location.href = '../Game_future_levle/Game_future_levle.html';
+            location.href = '../Game_future_level/Game_future_level.html';
         }
         else if(arrow_num==1){
             console.log('1입니다')
